@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 4A - Ciganjur 01</title>
+    <link rel="icon" href="img/4a.jpg">
+    <style>
+        body 
+        {
+            min-height: 100vh;
+            background: #093C5D;
+            background: linear-gradient(45deg, rgba(9, 60, 93, 1) 0%, rgba(59, 117, 151, 1) 100%);
+            margin: 0;
+        }
+        .copyrights
+        {
+            width: 100%;
+            padding: 16px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+            color: white;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.18);
+            position: sticky;
+            bottom: 0;
+        }
+        .section .gallery-slide img
+        {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+        }
+        @media (max-width: 700px) {
+            .div1 {
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+                padding: 12px;
+            }
+            .div1 button {
+                width: calc(50% - 14px);
+                min-width: 120px;
+                font-size: 14px;
+            }
+            .content-area {
+                padding: 16px 14px 100px;
+            }
+            .section .gallery-slide {
+                padding: 12px;
+            }
+            .gallery-controls {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .gallery-controls button {
+                width: 48%;
+            }
+        }
+        .div1
+        {
+            width: 100%;
+            min-height: 10%;
+            background: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+            padding: 16px 0;
+        }
+        .content-area
+        {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 24px 20px 80px;
+            color: white;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+        }
+        .section
+        {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .section.active
+        {
+            display: block;
+            opacity: 1;
+        }
+        .section h2
+        {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .section p
+        {
+            line-height: 1.6;
+            max-width: 760px;
+        }
+        .section .gallery-slider
+        {
+            position: relative;
+            overflow: hidden;
+            margin-top: 18px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            touch-action: pan-y;
+        }
+        .section .gallery-track
+        {
+            display: flex;
+            transition: transform 0.35s ease;
+        }
+        .section .gallery-slide
+        {
+            min-width: 100%;
+            flex-shrink: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .section .gallery-slide img
+        {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+        .gallery-controls
+        {
+            margin-top: 14px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+        }
+        .gallery-controls button
+        {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.16);
+            color: white;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .gallery-controls button:hover
+        {
+            background: rgba(255, 255, 255, 0.28);
+            transform: translateY(-1px);
+        }
+        .gallery-controls button:disabled
+        {
+            opacity: 0.5;
+            cursor: default;
+        }
+        .section .box
+        {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 14px;
+        }
+        .Home
+        {
+            width: 25%;
+            height: 50%;
+            background-color: #093C5D;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .About
+        {
+            width: 25%;
+            height: 50%;
+            background-color: #093C5D;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .Gallery
+        {
+            width: 25%;
+            height: 50%;
+            background-color: #093C5D;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .Contact
+        {
+            width: 25%;
+            height: 50%;
+            background-color: #093C5D;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .Home:hover, .About:hover, .Gallery:hover, .Contact:hover
+        {
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+        }
+        .button-active
+        {
+            transform: scale(1.15);
+            transition: transform 0.1s ease;
+            background-color: #0e4870;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <button class="Home">Home</button>
+        <button class="About">About</button>
+        <button class="Gallery">Gallery</button>
+        <button class="Contact">Contact</button>
+    </div>
+    <div class="content-area">
+        <div id="home" class="section active">
+            <h2>Welcome to Class 4A</h2>
+            <p>Welcome! This is the Class 4A website of Ciganjur 01. Use the buttons above to see the class overview, teacher and student details, gallery, and contact information.</p>
+            <div class="box">
+                <strong>Tip:</strong> Click each button to change the content shown here.
+            </div>
+        </div>
+        <div id="about" class="section">
+            <h2>About Class 4A</h2>
+            <p>Class 4A is a friendly and active class at Ciganjur 01. We work together on projects, celebrate academic achievements, and share school events.</p>
+            <div class="box">
+                <p>Class motto: “Tetap bersama, tidak berpisah.”</p>
+            </div>
+        </div>
+        <div id="gallery" class="section">
+            <h2>Gallery</h2>
+            <p>Here are some moments from class activities and events.</p>
+            <div class="gallery-slider">
+                <div class="gallery-track">
+                    <div class="gallery-slide"><img src="img/4a-wa.jpg" alt="Class photo 1"></div>
+                    <div class="gallery-slide"><img src="img/1.jpg" alt="Class photo 2"></div>
+                    <div class="gallery-slide"><img src="img/2.jpg" alt="Class photo 3"></div>
+                    <div class="gallery-slide"><img src="img/3.jpg" alt="Class photo 4"></div>
+                </div>
+            </div>
+            <div class="gallery-controls">
+                <button id="galleryPrev">◀ Previous</button>
+                <button id="galleryNext">Next ▶</button>
+            </div>
+        </div>
+        <div id="contact" class="section">
+            <h2>Contact</h2>
+            <p>If you need to get in touch with class representatives, teachers, or the school office, use the information below.</p>
+            <div class="box">
+                <p>Class rep: Yafa mulki al-Arkan</p>
+                <p>Teacher: Amin andriyani S.Pd</p>
+                <p>School: SDN Ciganjur 01</p>
+            </div>
+        </div>
+    </div>
+    <div class="copyrights">
+        <p>&copy; 2026 Yafa mulki al-Arkan. All rights reserved.</p>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('.div1 button');
+        const sections = document.querySelectorAll('.section');
+        const galleryTrack = document.querySelector('.gallery-track');
+        const gallerySlides = document.querySelectorAll('.gallery-slide');
+        const prevButton = document.getElementById('galleryPrev');
+        const nextButton = document.getElementById('galleryNext');
+        let activeSlide = 0;
+
+        function updateGallery() {
+            const distance = activeSlide * -100;
+            galleryTrack.style.transform = `translateX(${distance}%)`;
+            prevButton.disabled = activeSlide === 0;
+            nextButton.disabled = activeSlide === gallerySlides.length - 1;
+        }
+
+        const gallerySlider = document.querySelector('.gallery-slider');
+        let touchStartX = null;
+        let touchEndX = null;
+        const touchThreshold = 50;
+
+        function handleGallerySwipe() {
+            if (touchStartX === null || touchEndX === null) return;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > touchThreshold) {
+                if (diff > 0 && activeSlide < gallerySlides.length - 1) {
+                    activeSlide += 1;
+                } else if (diff < 0 && activeSlide > 0) {
+                    activeSlide -= 1;
+                }
+                updateGallery();
+            }
+            touchStartX = null;
+            touchEndX = null;
+        }
+
+        if (gallerySlider) {
+            gallerySlider.addEventListener('touchstart', (event) => {
+                touchStartX = event.touches[0].clientX;
+            });
+            gallerySlider.addEventListener('touchmove', (event) => {
+                touchEndX = event.touches[0].clientX;
+            });
+            gallerySlider.addEventListener('touchend', handleGallerySwipe);
+        }
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                buttons.forEach((btn) => btn.classList.remove('button-active'));
+                button.classList.add('button-active');
+
+                const targetId = button.textContent.toLowerCase();
+                sections.forEach((section) => {
+                    section.classList.toggle('active', section.id === targetId);
+                });
+            });
+        });
+
+        prevButton.addEventListener('click', () => {
+            activeSlide = Math.max(activeSlide - 1, 0);
+            updateGallery();
+        });
+
+        nextButton.addEventListener('click', () => {
+            activeSlide = Math.min(activeSlide + 1, gallerySlides.length - 1);
+            updateGallery();
+        });
+
+        updateGallery();
+    </script>
+</body>
+</html>
